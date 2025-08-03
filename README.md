@@ -1,19 +1,19 @@
-# [DashUI Next.js Free Admin Template](https://dashui-free-nextjs-admin-template.vercel.app/)
+# [DashUI Next.js Free Admin Template](https://tma-tes-tahap2.vercel.app/)
 
 Dash UI - Next.js Free admin / dashboard template created by [Codescandy](https://codescandy.com/) and available on Github
 
-![dashui-free-nextjs-admin-template](https://user-images.githubusercontent.com/68774600/231716707-3da30d19-b826-4692-b03a-fed41376d250.jpg)
+![tma-tes-tahap2](https://user-images.githubusercontent.com/68774600/231716707-3da30d19-b826-4692-b03a-fed41376d250.jpg)
 
 ## How to use DashUI?
 
 Clone the Dash UI repo:
 
 ```
-git clone https://github.com/codescandy/dashui-free-nextjs-admin-template.git
+git clone https://github.com/codescandy/tma-tes-tahap2.git
 ```
 
 ```
-cd dashui-free-nextjs-admin-template
+cd tma-tes-tahap2
 ```
 
 ## 🚀 Getting Started
@@ -42,7 +42,7 @@ npm run build
 
 ## Deploy on Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fcodescandy%2Fdashui-free-nextjs-admin-template.git&project-name=dashui-nextjs-admin-dashboard&repository-name=dashui-free-nextjs-admin-template&skippable-integrations=1)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fcodescandy%2Ftma-tes-tahap2.git&project-name=dashui-nextjs-admin-dashboard&repository-name=tma-tes-tahap2&skippable-integrations=1)
 
 ## Technical Support or Questions
 

@@ -1,6 +1,8 @@
-// import theme style scss file
 import Link from 'next/link';
 import 'styles/theme.scss';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
     title: 'Dash UI - Next.Js Admin Dashboard Template',
@@ -13,6 +15,8 @@ export default function RootLayout({ children }) {
         <html lang="en">
             <body className='bg-light'>
                 {children}
+                
+                <ToastContainer position="bottom-right" autoClose={3000} />
 
                 <Link href="https://bit.ly/3YoCCRH" target="_blank" className="btn btn-dark btn-float-button m-5 fs-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25"

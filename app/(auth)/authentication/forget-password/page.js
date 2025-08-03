@@ -4,11 +4,23 @@
 import { Row, Col, Card, Form, Button, Image } from 'react-bootstrap';
 import Link from 'next/link';
 
+
+import {  useEffect } from "react";
 // import hooks
 import useMounted from 'hooks/useMounted';
 
 const ForgetPassword = () => {
   const hasMounted = useMounted();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const res = await fetch('/api/check-session');
+      if (res.status === 200) {
+        window.location.href = '/';
+      }
+    };
+    checkAuth();
+  }, [hasMounetd]);
   return (
     <Row className="align-items-center justify-content-center g-0 min-vh-100">
       <Col xxl={4} lg={6} md={8} xs={12} className="py-8 py-xl-0">

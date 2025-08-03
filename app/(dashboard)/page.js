@@ -1,68 +1,78 @@
 'use client'
-// import node module libraries
-import { Fragment } from "react";
-import Link from 'next/link';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Fragment, useEffect, useState } from "react";
+import { Container, Col, Row, Table } from 'react-bootstrap';
+import { useRouter } from 'next/navigation';
 
-// import widget/custom components
-import { StatRightTopIcon } from "widgets";
+import { logout } from 'lib/auth';
 
-// import sub components
-import { ActiveProjects, Teams, 
-    TasksPerformance 
-} from "sub-components";
+import useMounted from 'hooks/useMounted';
 
-// import required data files
-import ProjectsStatsData from "data/dashboard/ProjectsStatsData";
 
 const Home = () => {
+    const router = useRouter();
+    const [products, setProducts] = useState([]);
+
+    const hasMounted = useMounted();
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            const res = await fetch('/api/check-session');
+            if (res.status !== 200) {
+                window.location.href = '/authentication/sign-in';
+            }
+        };
+
+        const fetchProducts = async () => {
+            try {
+                const res = await fetch('/api/products', {
+                    credentials: 'include',
+                });
+                const data = await res.json();
+                setProducts(data);
+            } catch (err) {
+                console.error('Failed to fetch products:', err);
+            }
+        };
+
+        checkAuth();
+        fetchProducts();
+    }, [hasMounted]);
+
     return (
         <Fragment>
             <div className="bg-primary pt-10 pb-21"></div>
             <Container fluid className="mt-n22 px-6">
-                <Row>
-                    <Col lg={12} md={12} xs={12}>
-                        {/* Page header */}
-                        <div>
-                            <div className="d-flex justify-content-between align-items-center">
-                                <div className="mb-2 mb-lg-0">
-                                    <h3 className="mb-0  text-white">Projects</h3>
-                                </div>
-                                <div>
-                                    <Link href="#" className="btn btn-white">Create New Project</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </Col>
-                    {ProjectsStatsData.map((item, index) => {
-                        return (
-                            <Col xl={3} lg={6} md={12} xs={12} className="mt-6" key={index}>
-                                <StatRightTopIcon info={item} />
-                            </Col>
-                        )
-                    })}
-                </Row>
 
-                {/* Active Projects  */}
-                <ActiveProjects />
-
-                <Row className="my-6">
-                    <Col xl={4} lg={12} md={12} xs={12} className="mb-6 mb-xl-0">
-
-                        {/* Tasks Performance  */}
-                        <TasksPerformance />
-
-                    </Col>
-                    {/* card  */}
-                    <Col xl={8} lg={12} md={12} xs={12}>
-
-                        {/* Teams  */}
-                        <Teams />
-
+                <Row className="mt-5">
+                    <Col xs={12}>
+                        <h4>Products Table</h4>
+                        <Table striped bordered hover responsive>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Product Name</th>
+                                    <th>Brand</th>
+                                    <th>Owner</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {products.map((prod) => (
+                                    <tr key={prod.product_id}>
+                                        <td>{prod.product_id}</td>
+                                        <td>{prod.product_name}</td>
+                                        <td>{prod.product_brand}</td>
+                                        <td>{prod.product_owner || '—'}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
                     </Col>
                 </Row>
+                <button onClick={() => { logout() }}>Logout</button>
+
             </Container>
         </Fragment>
-    )
-}
+    );
+};
+
 export default Home;
